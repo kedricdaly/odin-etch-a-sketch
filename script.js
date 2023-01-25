@@ -24,7 +24,7 @@ function generateGrid(N) {
 }
 
 function cellHover(e) {
-    console.log(e.target)
+    e.target.setAttribute('style','background-color: black')
 }
 
 window.addEventListener('load',generateGrid(16));
