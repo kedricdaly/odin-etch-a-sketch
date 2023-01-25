@@ -1,0 +1,31 @@
+body {
+    display:flex;
+    flex-direction: column;
+    border-width: 2px;
+    border-color: blue;
+    border-style: solid;
+}
+
+.easel {
+    border-width: 2px;
+    border-color: red;
+    border-style: solid;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.grid-row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: auto;
+}
+
+.cell {
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    min-width: 10px;
+    min-height: 10px;
+}
