@@ -2,6 +2,13 @@ function generateGrid(N) {
 
 
     const easel = document.querySelector('.easel');
+    // remove grid if it currently exists
+    // use an array because NodeLists are live collections
+    // so if we try to remove each node in a node list, items in
+    // the list move, and we don't remove all nodes 
+    easelChildren = Array.from(document.querySelector('.easel').childNodes);
+    easelChildren.forEach(child => child.remove());
+
     // loop twice to generate an NxN grid
     for (let i = 0; i < N; i++) {
         // create a grid-row
