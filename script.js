@@ -27,12 +27,43 @@ function generateGrid(N) {
     cells = document.querySelectorAll('.cell')
     cells.forEach(cell => cell.addEventListener('mouseenter', cellHover));
 
-}
+    }
 }
 
 function cellHover(e) {
     e.target.setAttribute('style','background-color: black')
 }
 
-window.addEventListener('load',generateGrid(16));
+
+function startUp() {
+    const START_SIZE = 16
+    generateGrid(START_SIZE);
+    setGridSliderValue(START_SIZE);
+    updateSizeDisplay(START_SIZE);
+
+    // we need a listener for when the value changes, so we can change the grid
+    // size and the displayed value
+    const gridSlider = document.querySelector('#gridSlider');
+    gridSlider.addEventListener('input', updateGrid)
+
+}
+
+function updateSizeDisplay(N) {
+    const sizeDisp = document.querySelector('#sizeDisplay');
+    sizeDisp.innerText = `${N}x${N}`;
+}
+
+function setGridSliderValue(N) {
+    const gridSlider = document.querySelector('#gridSlider');
+    gridSlider.value = N;
+}
+
+function updateGrid(e) {
+    const newVal = e.target.value;
+    updateSizeDisplay(newVal);
+    generateGrid(newVal);
+}
+
+window.onload = startUp();
+//window.addEventListener('load',startUp);
 
