@@ -22,16 +22,22 @@ function generateGrid(N) {
         }
         easel.appendChild(gridRow);
 
-    // add event listeners to the cell elements so when a new grid size
+    // add event listeners to the cell elements so, when a new grid size
     // is requested, all cells function appropriately
     cells = document.querySelectorAll('.cell')
     cells.forEach(cell => cell.addEventListener('mouseenter', cellHover));
+    cells.forEach(cell => cell.addEventListener('click', cellClick));
 
     }
 }
 
 function cellHover(e) {
-    e.target.setAttribute('style','background-color: black')
+    if (e.buttons != 1) return; // requires primary mouse click
+    e.target.setAttribute('style','background-color: black');
+}
+
+function cellClick(e) {
+    e.target.setAttribute('style','background-color: black');
 }
 
 
@@ -65,5 +71,3 @@ function updateGrid(e) {
 }
 
 window.onload = startUp();
-//window.addEventListener('load',startUp);
-
