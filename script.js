@@ -144,7 +144,7 @@ function colorFromMode(thisMode) {
         case 'rainbow':
             // https://css-tricks.com/snippets/javascript/random-hex-color/
             // generate a hexdecimal number, and return it as a hex string
-            return "#" + Math.floor(Math.random()*16777215).toString(16);
+            return generateRandomHexColor();
         case 'custom':
             // need some way to get the saved color - likely background color
             return "#FACADE"
@@ -153,6 +153,16 @@ function colorFromMode(thisMode) {
         default:
             console.log(`unknown mode in colorFromMode: ${thisMode}`);
     }
+}
+
+function generateRandomHexColor() {
+    // https://css-tricks.com/snippets/javascript/random-hex-color/#comment-192864
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.round(Math.random() * 15)];
+    }
+    return color;
 }
 
 window.onload = startUp();
