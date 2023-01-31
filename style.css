@@ -1,31 +1,45 @@
 body {
     display:flex;
-    flex-direction: column;
+    flex-flow: column wrap;
+
     border-width: 2px;
     border-color: blue;
     border-style: solid;
 }
 
+.content {
+    display: flex;
+}
+
 .easel {
+    display: flex;
+    flex: 0 1 0;
+    flex-flow: column wrap;
+    
     border-width: 2px;
     border-color: red;
     border-style: solid;
-    flex-wrap: wrap;
-    flex-direction: column;
+    
 }
 
 .flex-row {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    width: 100%;
-    height: auto;
+    flex-flow: row;
+    justify-content: space-evenly;
 }
 
 .cell {
+    flex: 1 0 0;
+    height: auto;
     border-color: black;
     border-width: 2px;
     border-style: solid;
     min-width: 10px;
-    min-height: 10px;
+}
+
+.cell::before {
+    content:'';
+    float: left;
+    padding-top: 100%;
+    display: table;
 }
