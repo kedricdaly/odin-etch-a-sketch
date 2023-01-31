@@ -43,3 +43,16 @@ body {
     padding-top: 100%;
     display: table;
 }
+
+.btnContainer {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.currentMode {
+    background-color: grey;
+}
+
+.btnContainer, button {
+    border-radius: 5px;
+}

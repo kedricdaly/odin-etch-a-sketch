@@ -25,34 +25,37 @@ function generateGrid(N) {
     // is requested, all cells function appropriately
     cells = document.querySelectorAll('.cell')
     cells.forEach(cell => cell.addEventListener('click', cellClick));
-    cells.forEach(cell => cell.addEventListener('mouseenter', cellEnter));
-    cells.forEach(cell => cell.addEventListener('mouseleave', cellLeave));
-
+    cells.forEach(cell => cell.addEventListener('mouseenter', cellHover));
+    cells.forEach(cell => cell.addEventListener('mouseleave', cellHover));
     }
 }
 
 function cellClick(e) {
-    e.target.setAttribute('style','background-color: black');
+    curMode = getCurrentMode();
+    color = colorFromMode(curMode);
+    e.target.setAttribute('style',`background-color: ${color}`);
 }
 
-function cellEnter(e) {
+function cellHover(e) {
     if (e.buttons != 1) return; // requires primary mouse click
-    e.target.setAttribute('style','background-color: black');
-}
-
-function cellLeave(e) {
-    if (e.buttons != 1) return; // requires primary mouse click
-    e.target.setAttribute('style','background-color: black');
+    curMode = getCurrentMode();
+    color = colorFromMode(curMode);
+    e.target.setAttribute('style',`background-color: ${color}`);
 }
 
 function startUp() {
     const START_SIZE = 16;
-    generateGrid(START_SIZE);
+    
     setGridSliderValue(START_SIZE);
     updateSizeDisplay(START_SIZE);
 
-    // we need a listener for when the value changes, so we can change the grid
-    // size and the displayed value
+    // ensure we have the proper mode selected
+    setMode('black');
+
+    generateGrid(START_SIZE);
+
+    // we need a listener for when the slider value changes, so we can change
+    // the displayed value
     const gridSlider = document.querySelector('#gridSlider');
     gridSlider.addEventListener('input', updateSizeDisplay)
 
@@ -61,6 +64,10 @@ function startUp() {
 
     const clrButton = document.querySelector('#clrBtn');
     clrButton.addEventListener('click', eraseGrid)
+
+    // add event listeners for mode buttons
+    const modeBtns = Array.from(document.querySelectorAll('.modeBtn'))
+    modeBtns.forEach(btn => btn.addEventListener('click',setModeWrapper));
 
 }
 
@@ -92,6 +99,60 @@ function updateGrid(e) {
 
 function eraseGrid(e) {
     generateGrid(getGridSliderValue());
+}
+
+function setModeWrapper(e) {
+    setMode(e.target.innerText.toLowerCase());
+}
+
+function setMode(newMode) {
+
+    // remove old mode if it exists
+    const oldMode = document.querySelector('.currentMode')
+    if (oldMode) oldMode.setAttribute('class', 'modeBtn');
+
+    switch (newMode) {
+        case 'black':
+            btn = document.querySelector('#blkBtn');
+            break;
+        case 'rainbow':
+            btn = document.querySelector('#rainbowBtn');
+            break;
+        case 'custom':
+            btn = document.querySelector('#customBtn');
+            break;
+        case 'eraser':
+            btn = document.querySelector('#eraserBtn');
+            break;
+        default:
+            console.log(`tried to set mode to ${newMode} but case not found`);
+
+    }
+
+    btn.setAttribute('class', 'modeBtn currentMode');
+}
+
+function getCurrentMode() {
+    return document.querySelector('.currentMode').innerText.toLowerCase();
+}
+
+function colorFromMode(thisMode) {
+    switch (thisMode) {
+        case 'black':
+            return 'black';
+            break;
+        case 'rainbow':
+            // https://css-tricks.com/snippets/javascript/random-hex-color/
+            // generate a hexdecimal number, and return it as a hex string
+            return "#" + Math.floor(Math.random()*16777215).toString(16);
+        case 'custom':
+            // need some way to get the saved color - likely background color
+            return "#FACADE"
+        case 'eraser':
+            return 'white';
+        default:
+            console.log(`unknown mode in colorFromMode: ${thisMode}`);
+    }
 }
 
 window.onload = startUp();
