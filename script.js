@@ -1,6 +1,5 @@
 function generateGrid(N) {
 
-
     const easel = document.querySelector('.easel');
     // remove grid if it currently exists
     // use an array because NodeLists are live collections
@@ -25,21 +24,26 @@ function generateGrid(N) {
     // add event listeners to the cell elements so, when a new grid size
     // is requested, all cells function appropriately
     cells = document.querySelectorAll('.cell')
-    cells.forEach(cell => cell.addEventListener('mouseenter', cellHover));
     cells.forEach(cell => cell.addEventListener('click', cellClick));
+    cells.forEach(cell => cell.addEventListener('mouseenter', cellEnter));
+    cells.forEach(cell => cell.addEventListener('mouseleave', cellLeave));
 
     }
-}
-
-function cellHover(e) {
-    if (e.buttons != 1) return; // requires primary mouse click
-    e.target.setAttribute('style','background-color: black');
 }
 
 function cellClick(e) {
     e.target.setAttribute('style','background-color: black');
 }
 
+function cellEnter(e) {
+    if (e.buttons != 1) return; // requires primary mouse click
+    e.target.setAttribute('style','background-color: black');
+}
+
+function cellLeave(e) {
+    if (e.buttons != 1) return; // requires primary mouse click
+    e.target.setAttribute('style','background-color: black');
+}
 
 function startUp() {
     const START_SIZE = 16;
