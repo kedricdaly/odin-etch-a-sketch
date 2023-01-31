@@ -13,14 +13,14 @@ function generateGrid(N) {
     for (let i = 0; i < N; i++) {
         // create a grid-row
         // append cells to grid row, then afterward append grid-row to easel
-        const gridRow = document.createElement('div');
-        gridRow.setAttribute('class','grid-row');
+        const flexRow = document.createElement('div');
+        flexRow.setAttribute('class','flex-row');
         for (let j = 0; j < N; j++) {
             const div = document.createElement('div');
             div.setAttribute('class','cell');
-            gridRow.appendChild(div);
+            flexRow.appendChild(div);
         }
-        easel.appendChild(gridRow);
+        easel.appendChild(flexRow);
 
     // add event listeners to the cell elements so, when a new grid size
     // is requested, all cells function appropriately
@@ -42,7 +42,7 @@ function cellClick(e) {
 
 
 function startUp() {
-    const START_SIZE = 16
+    const START_SIZE = 16;
     generateGrid(START_SIZE);
     setGridSliderValue(START_SIZE);
     updateSizeDisplay(START_SIZE);
