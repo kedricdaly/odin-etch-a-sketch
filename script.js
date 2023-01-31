@@ -136,6 +136,10 @@ function getCurrentMode() {
     return document.querySelector('.currentMode').innerText.toLowerCase();
 }
 
+function getCustomColor() {
+    return document.querySelector('#colorPicker').value;
+}
+
 function colorFromMode(thisMode) {
     switch (thisMode) {
         case 'black':
@@ -147,7 +151,7 @@ function colorFromMode(thisMode) {
             return generateRandomHexColor();
         case 'custom':
             // need some way to get the saved color - likely background color
-            return "#FACADE"
+            return getCustomColor();
         case 'eraser':
             return 'white';
         default:

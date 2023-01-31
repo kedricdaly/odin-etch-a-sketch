@@ -56,3 +56,14 @@ body {
 .btnContainer, button {
     border-radius: 5px;
 }
+
+#custom-container {
+    display: flex;
+    flex: 1 0 100%;
+    flex-flow: row nowrap;
+
+}
+
+#customBtn {
+    flex: 1 0 67%;
+}
