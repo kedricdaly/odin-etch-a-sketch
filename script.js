@@ -56,6 +56,9 @@ function startUp() {
     const gridSlider = document.querySelector('#gridSlider');
     gridSlider.addEventListener('input', updateGrid)
 
+    const clrButton = document.querySelector('#clrButton');
+    clrButton.addEventListener('click', eraseGrid)
+
 }
 
 function updateSizeDisplay(N) {
@@ -68,10 +71,19 @@ function setGridSliderValue(N) {
     gridSlider.value = N;
 }
 
+function getGridSliderValue() {
+    const gridSlider = document.querySelector('#gridSlider');
+    return gridSlider.value;
+}
+
 function updateGrid(e) {
     const newVal = e.target.value;
     updateSizeDisplay(newVal);
     generateGrid(newVal);
+}
+
+function eraseGrid(e) {
+    generateGrid(getGridSliderValue());
 }
 
 window.onload = startUp();
