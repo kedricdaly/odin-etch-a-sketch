@@ -54,15 +54,19 @@ function startUp() {
     // we need a listener for when the value changes, so we can change the grid
     // size and the displayed value
     const gridSlider = document.querySelector('#gridSlider');
-    gridSlider.addEventListener('input', updateGrid)
+    gridSlider.addEventListener('input', updateSizeDisplay)
 
-    const clrButton = document.querySelector('#clrButton');
+    const updateGridSizeBtn = document.querySelector('#updateGridSizeBtn');
+    updateGridSizeBtn.addEventListener('click', updateGrid)
+
+    const clrButton = document.querySelector('#clrBtn');
     clrButton.addEventListener('click', eraseGrid)
 
 }
 
-function updateSizeDisplay(N) {
+function updateSizeDisplay() {
     const sizeDisp = document.querySelector('#sizeDisplay');
+    const N = getGridSliderValue();
     sizeDisp.innerText = `${N}x${N}`;
 }
 
@@ -77,9 +81,13 @@ function getGridSliderValue() {
 }
 
 function updateGrid(e) {
-    const newVal = e.target.value;
-    updateSizeDisplay(newVal);
-    generateGrid(newVal);
+    const gridSize = getGridSliderValue();
+
+    // do not update if grid is same size
+    const flexRow = document.querySelector('.flex-row');
+    if (flexRow.childElementCount == gridSize) return;
+
+    generateGrid(gridSize);
 }
 
 function eraseGrid(e) {
