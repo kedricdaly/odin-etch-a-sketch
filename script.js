@@ -69,6 +69,9 @@ function startUp() {
     const modeBtns = Array.from(document.querySelectorAll('.modeBtn'))
     modeBtns.forEach(btn => btn.addEventListener('click',setModeWrapper));
 
+    const colorPicker = document.querySelector('#colorPicker');
+    colorPicker.addEventListener('change',colorSelectWrapper);
+
 }
 
 function updateSizeDisplay() {
@@ -120,6 +123,10 @@ function setMode(newMode) {
             break;
         case 'custom':
             btn = document.querySelector('#customBtn');
+            let bgColor = getCustomColor();
+            let fgColor = fontColorFromBackgroundHex(bgColor);
+            btn.setAttribute('style',`background-color:${bgColor}
+            ;color:${fgColor}`)
             break;
         case 'eraser':
             btn = document.querySelector('#eraserBtn');
@@ -140,17 +147,20 @@ function getCustomColor() {
     return document.querySelector('#colorPicker').value;
 }
 
+function colorSelectWrapper(e) {
+    setMode('custom');
+}
+
 function colorFromMode(thisMode) {
     switch (thisMode) {
         case 'black':
             return 'black';
             break;
         case 'rainbow':
-            // https://css-tricks.com/snippets/javascript/random-hex-color/
             // generate a hexdecimal number, and return it as a hex string
             return generateRandomHexColor();
         case 'custom':
-            // need some way to get the saved color - likely background color
+            const customBtn = document.querySelector('#customBtn')
             return getCustomColor();
         case 'eraser':
             return 'white';
@@ -167,6 +177,18 @@ function generateRandomHexColor() {
         color += letters[Math.round(Math.random() * 15)];
     }
     return color;
+}
+
+function fontColorFromBackgroundHex(hexString) {
+    // https://stackoverflow.com/questions/3942878/how-to-decide-font-color-in-white-or-black-depending-on-background-color
+    let red = parseInt(hexString.slice(1,3),16);
+    let green = parseInt(hexString.slice(3,5),16);
+    let blue = parseInt(hexString.slice(5,7),16);
+
+    let contrastRatio = (red * 0.299) + (green * 0.587) + (blue * 0.144)
+    if (contrastRatio > 186) return '#000000';
+    return '#ffffff';
+
 }
 
 window.onload = startUp();
