@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>TOP - Etch-a-Sketch</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="etch-a-sketch.ico">
+
+  <script src="script.js" defer></script>
+  
+</head>
+<body>
+    <h1>Etch-a-Sketch</h1>
+    <div class="content">
+        <div class="options">
+            <h2>Options</h2>
+            <input id="gridSlider" type="range" min="1" max="32">
+            <div id="sizeDisplay"></div>
+            <div class="btnContainer">
+                <button id="updateGridSizeBtn">Update Grid Size</button>
+                <button id="blkBtn" class="modeBtn">Black</button>
+                <button id="rainbowBtn" class="modeBtn">Rainbow</button>
+                <div id="custom-container">
+                    <button id="customBtn" class="modeBtn">Custom</button>
+                    <input id="colorPicker" type="color">
+                </div>
+                <button id="eraserBtn" class="modeBtn">Eraser</button>
+                <button id="clrBtn">Clear</button>
+            </div>
+        </div>
+        <div class="easel-meta">
+            <div class="easel-container">
+                <div class="easel"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<footer class="footer">
+    <div class="subfooter">
+        <p>
+        Copyright ©
+        <script>
+            document.write(new Date().getFullYear())
+        </script>
+        </p>
+        <a href="https://github.com/kedricdaly" target="_noopener">
+            <p>kedricdaly</p>
+            <img class="github-icon" src="github-mark.png"></img>
+        </a>
+    </div>
+    <div class="subfooter faviconattr">
+        <a href="https://www.freeimages.com/icon/etch-a-sketch-5593952?ref=findicons" title="draw icons">Favicon created by The Iconfactory</a>
+    </div>
+  </footer>
