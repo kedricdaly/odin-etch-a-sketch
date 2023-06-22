@@ -8,6 +8,14 @@ function generateGrid(N) {
     easelChildren = Array.from(document.querySelector('.easel').childNodes);
     easelChildren.forEach(child => child.remove());
 
+    //console.log(easel)
+    let width = easel.clientHeight;
+    let ratio = 1;
+    //let height = width * ratio;
+
+    widthOfCell = width / N;
+    heightOfCell = widthOfCell * ratio;
+
     // loop twice to generate an NxN grid
     for (let i = 0; i < N; i++) {
         // create a grid-row
@@ -17,6 +25,8 @@ function generateGrid(N) {
         for (let j = 0; j < N; j++) {
             const div = document.createElement('div');
             div.setAttribute('class','cell');
+            div.style.minWidth = `${widthOfCell}px`;
+            div.style.minHeight = `${heightOfCell}px`;
             flexRow.appendChild(div);
         }
         easel.appendChild(flexRow);
@@ -33,14 +43,14 @@ function generateGrid(N) {
 function cellClick(e) {
     curMode = getCurrentMode();
     color = colorFromMode(curMode);
-    e.target.setAttribute('style',`background-color: ${color}`);
+    e.target.style.backgroundColor = color;
 }
 
 function cellHover(e) {
     if (e.buttons != 1) return; // requires primary mouse click
     curMode = getCurrentMode();
     color = colorFromMode(curMode);
-    e.target.setAttribute('style',`background-color: ${color}`);
+    e.target.style.backgroundColor = color;
 }
 
 function startUp() {
