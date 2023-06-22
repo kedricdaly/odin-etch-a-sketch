@@ -8,10 +8,8 @@ function generateGrid(N) {
     easelChildren = Array.from(document.querySelector('.easel').childNodes);
     easelChildren.forEach(child => child.remove());
 
-    //console.log(easel)
     let width = easel.clientHeight;
     let ratio = 1;
-    //let height = width * ratio;
 
     widthOfCell = width / N;
     heightOfCell = widthOfCell * ratio;
@@ -138,9 +136,9 @@ function setMode(newMode) {
             btn = document.querySelector('#customBtn');
             let bgColor = getCustomColor();
             let fgColor = fontColorFromBackgroundHex(bgColor);
-            btn.setAttribute('style',`background-color: ${bgColor};
-            color: ${fgColor};
-            box-shadow: inset 0px 0px 20px #BFBFBF`)
+            btn.style.backgroundColor = bgColor;
+            btn.style.fgColor = fgColor;
+            btn.style.boxShadow = 'inset 0px 0px 20px #BFBFBF'
             break;
         case 'eraser':
             btn = document.querySelector('#eraserBtn');
