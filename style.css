@@ -25,36 +25,15 @@ body {
 }
 
 .easel {
+    width: 250px;
+    aspect-ratio: 1;
     display: flex;
     flex: 0 1 0;
     flex-flow: column wrap;
     
-    border-width: 2px;
-    border-color: red;
-    border-style: solid;
+    border: 20px solid red;
+    border-radius: 20px;
     
-}
-
-.flex-row {
-    display: flex;
-    flex-flow: row;
-    justify-content: space-evenly;
-}
-
-.cell {
-    flex: 1 0 0;
-    height: auto;
-    border-color: black;
-    border-width: 2px;
-    border-style: solid;
-    min-width: 10px;
-}
-
-.cell::before {
-    content:'';
-    float: left;
-    padding-top: 100%;
-    display: table;
 }
 
 .btnContainer {

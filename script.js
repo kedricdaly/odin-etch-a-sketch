@@ -8,6 +8,12 @@ function generateGrid(N) {
     easelChildren = Array.from(document.querySelector('.easel').childNodes);
     easelChildren.forEach(child => child.remove());
 
+    let width = easel.clientHeight;
+    let ratio = 1;
+
+    widthOfCell = width / N;
+    heightOfCell = widthOfCell * ratio;
+
     // loop twice to generate an NxN grid
     for (let i = 0; i < N; i++) {
         // create a grid-row
@@ -17,6 +23,8 @@ function generateGrid(N) {
         for (let j = 0; j < N; j++) {
             const div = document.createElement('div');
             div.setAttribute('class','cell');
+            div.style.minWidth = `${widthOfCell}px`;
+            div.style.minHeight = `${heightOfCell}px`;
             flexRow.appendChild(div);
         }
         easel.appendChild(flexRow);
@@ -33,14 +41,14 @@ function generateGrid(N) {
 function cellClick(e) {
     curMode = getCurrentMode();
     color = colorFromMode(curMode);
-    e.target.setAttribute('style',`background-color: ${color}`);
+    e.target.style.backgroundColor = color;
 }
 
 function cellHover(e) {
     if (e.buttons != 1) return; // requires primary mouse click
     curMode = getCurrentMode();
     color = colorFromMode(curMode);
-    e.target.setAttribute('style',`background-color: ${color}`);
+    e.target.style.backgroundColor = color;
 }
 
 function startUp() {
@@ -128,9 +136,9 @@ function setMode(newMode) {
             btn = document.querySelector('#customBtn');
             let bgColor = getCustomColor();
             let fgColor = fontColorFromBackgroundHex(bgColor);
-            btn.setAttribute('style',`background-color: ${bgColor};
-            color: ${fgColor};
-            box-shadow: inset 0px 0px 20px #BFBFBF`)
+            btn.style.backgroundColor = bgColor;
+            btn.style.fgColor = fgColor;
+            btn.style.boxShadow = 'inset 0px 0px 20px #BFBFBF'
             break;
         case 'eraser':
             btn = document.querySelector('#eraserBtn');
