@@ -111,8 +111,11 @@ function setModeWrapper(e) {
 function setMode(newMode) {
 
     // remove old mode if it exists
-    const oldMode = document.querySelector('.currentMode')
-    if (oldMode) oldMode.setAttribute('class', 'modeBtn');
+    const oldMode = document.querySelector('.currentMode');
+    if (oldMode) {
+        oldMode.setAttribute('class', 'modeBtn');
+        if (oldMode.id === 'customBtn') oldMode.style.removeProperty('box-shadow');
+    } 
 
     switch (newMode) {
         case 'black':
@@ -125,8 +128,9 @@ function setMode(newMode) {
             btn = document.querySelector('#customBtn');
             let bgColor = getCustomColor();
             let fgColor = fontColorFromBackgroundHex(bgColor);
-            btn.setAttribute('style',`background-color:${bgColor}
-            ;color:${fgColor}`)
+            btn.setAttribute('style',`background-color: ${bgColor};
+            color: ${fgColor};
+            box-shadow: inset 0px 0px 20px #BFBFBF`)
             break;
         case 'eraser':
             btn = document.querySelector('#eraserBtn');
