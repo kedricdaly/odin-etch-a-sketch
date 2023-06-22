@@ -3,6 +3,8 @@
 
 An etch-a-sketch game created using html, css, and javascript.
 
+[Live Demo](https://kedricdaly.github.io/odin-etch-a-sketch/)
+
 # Usage
 Click, or click-and-drag to change colors of cells in the grid.
 
