@@ -16,6 +16,14 @@ body {
     display: flex;
 }
 
+.easel-meta {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: row;
+}
+
 .easel {
     display: flex;
     flex: 0 1 0;
